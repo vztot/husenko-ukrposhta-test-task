@@ -3,6 +3,7 @@ package com.vztot.service.impl;
 import com.vztot.entity.User;
 import com.vztot.repository.UserRepository;
 import com.vztot.service.UserService;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User create(User user) {
+    public User save(User user) {
         return userRepository.save(user);
     }
 
@@ -27,5 +28,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getOne(Long id) {
         return userRepository.getOne(id);
+    }
+
+    @Override
+    public void addMoney(Long userId, BigDecimal amount) {
+        User user = userRepository.getOne(userId);
+        user.setMoney(user.getMoney().add(amount));
+        userRepository.save(user);
     }
 }

@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
 @RequestMapping("/discount")
+@RestController
 public class DiscountController {
 
     private final DiscountService discountService;
@@ -26,6 +26,6 @@ public class DiscountController {
 
     @PostMapping("/add")
     public void add(@RequestBody Discount discount) {
-        discountService.create(discount);
+        discountService.save(discount);
     }
 }

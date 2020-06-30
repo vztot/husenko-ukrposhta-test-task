@@ -1,7 +1,7 @@
-# husenko-ukrposhta-test-task
+# husenko-ukrposhta-test-task [![Build Status](https://travis-ci.com/vztot/husenko-ukrposhta-test-task.svg?branch=master)](https://travis-ci.com/vztot/husenko-ukrposhta-test-task)
 
 ## Project purpose
-This project is my solution of a [test-task](TEST_TASK.md) from UkrPoshta.
+This project is my solution of a [test-task](TEST_TASK.md) from UkrPoshta. 
 
 ## Project structure
 * Java 11

@@ -3,7 +3,7 @@ package com.vztot.service;
 import java.util.List;
 
 public interface GenericService<T> {
-    T create(T t);
+    T save(T t);
 
     List<T> getAll();
 

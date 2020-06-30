@@ -15,7 +15,7 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public Discount create(Discount discount) {
+    public Discount save(Discount discount) {
         return discountRepository.save(discount);
     }
 
