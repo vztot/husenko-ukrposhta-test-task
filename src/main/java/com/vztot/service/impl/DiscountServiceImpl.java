@@ -15,12 +15,12 @@ public class DiscountServiceImpl implements DiscountService {
     }
 
     @Override
-    public Discount save(Discount discount) {
+    public Discount create(Discount discount) {
         return discountRepository.save(discount);
     }
 
     @Override
-    public List<Discount> findAll() {
+    public List<Discount> getAll() {
         return discountRepository.findAll();
     }
 

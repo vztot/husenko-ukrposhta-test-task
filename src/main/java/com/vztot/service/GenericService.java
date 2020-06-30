@@ -3,9 +3,9 @@ package com.vztot.service;
 import java.util.List;
 
 public interface GenericService<T> {
-    T save(T t);
+    T create(T t);
 
-    List<T> findAll();
+    List<T> getAll();
 
     T getOne(Long id);
 }

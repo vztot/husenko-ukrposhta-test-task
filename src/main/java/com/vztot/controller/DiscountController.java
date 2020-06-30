@@ -21,11 +21,11 @@ public class DiscountController {
 
     @GetMapping("/all")
     public List<Discount> findALl() {
-        return discountService.findAll();
+        return discountService.getAll();
     }
 
     @PostMapping("/add")
     public void add(@RequestBody Discount discount) {
-        discountService.save(discount);
+        discountService.create(discount);
     }
 }

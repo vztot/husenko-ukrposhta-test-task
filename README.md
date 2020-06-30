@@ -9,12 +9,16 @@ This project is my solution of a [test-task](TEST_TASK.md) from UkrPoshta.
 * Spring Boot
 * H2 (in memory database)
 * Maven Checkstyle Plugin
-* JUnit
 * Travis CI
 
 ## For developer
 To run this project:
-* 
+
+1. Open the project in your IDE.
+  
+2. Add Java SDK 11 or above.
+  
+3. Run TestTaskApplication.
 
 ## Author
 [Oleksandr Husenko](https://www.linkedin.com/in/oleksandr-husenko-6a63a2b3/)
