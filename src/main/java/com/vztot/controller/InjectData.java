@@ -41,27 +41,38 @@ public class InjectData {
 
         Category phone = new Category();
         phone.setCategoryName("Phone");
-        phone = categoryService.save(phone);
         Category tablet = new Category();
         tablet.setCategoryName("Tablet");
-        tablet = categoryService.save(tablet);
         Category laptop = new Category();
         laptop.setCategoryName("Laptop");
-        laptop = categoryService.save(laptop);
         Category car = new Category();
         car.setCategoryName("Car");
+        phone = categoryService.save(phone);
+        tablet = categoryService.save(tablet);
+        laptop = categoryService.save(laptop);
         car = categoryService.save(car);
 
         Product iphone = new Product();
-        iphone.setPrice(new BigDecimal(1000));
+        iphone.setName("iPhone");
+        iphone.setDescription("Mobile phone");
         iphone.setCategory(phone);
+        iphone.setPrice(new BigDecimal(1000));
+
         Product ipad = new Product();
+        ipad.setName("iPad");
+        ipad.setDescription("Ergonomic tablet");
         ipad.setCategory(tablet);
         ipad.setPrice(new BigDecimal(1500));
+
         Product macBook = new Product();
+        macBook.setName("MacBook");
+        macBook.setDescription("Ergonomic laptop");
         macBook.setCategory(laptop);
         macBook.setPrice(new BigDecimal(2000));
+
         Product tesla = new Product();
+        tesla.setName("Tesla");
+        tesla.setDescription("Electric car");
         tesla.setPrice(new BigDecimal(20000));
         tesla.setCategory(car);
 

@@ -26,7 +26,7 @@ public class UserController {
         this.userMapper = userMapper;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/list")
     public List<UserResponseDto> getAll() {
         return userService.getAll()
                 .stream()
