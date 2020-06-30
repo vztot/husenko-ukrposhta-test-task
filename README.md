@@ -1,4 +1,4 @@
-# husenko-urkposhta-test-task
+# husenko-ukrposhta-test-task
 
 ## Project purpose
 This project is my solution of a [test-task](TEST_TASK.md) from UkrPoshta.
