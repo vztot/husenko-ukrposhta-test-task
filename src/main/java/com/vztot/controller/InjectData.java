@@ -106,6 +106,6 @@ public class InjectData {
         discountService.save(birthdayDiscount);
         discountService.save(blackFridayDiscount);
 
-        return "Data injected!";
+        return "{\"result\" : \"data injected\"}";
     }
 }
