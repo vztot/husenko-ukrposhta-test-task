@@ -14,7 +14,7 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String name;
-    BigDecimal money;
+    private Long id;
+    private String name;
+    private BigDecimal money;
 }

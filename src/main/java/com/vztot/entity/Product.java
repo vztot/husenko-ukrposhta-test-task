@@ -15,10 +15,10 @@ import lombok.Data;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
+    private Long id;
     @ManyToOne
-    Category category;
-    String name;
-    String description;
-    BigDecimal price;
+    private Category category;
+    private String name;
+    private String description;
+    private BigDecimal price;
 }
