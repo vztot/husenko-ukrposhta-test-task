@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class UserResponseDto {
-    Long id;
-    String name;
-    BigDecimal money;
+    private Long id;
+    private String name;
+    private BigDecimal money;
 }

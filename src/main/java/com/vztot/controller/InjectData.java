@@ -1,6 +1,7 @@
 package com.vztot.controller;
 
 import com.vztot.entity.Category;
+import com.vztot.entity.Discount;
 import com.vztot.entity.Product;
 import com.vztot.entity.User;
 import com.vztot.service.CategoryService;
@@ -8,6 +9,7 @@ import com.vztot.service.DiscountService;
 import com.vztot.service.ProductService;
 import com.vztot.service.UserService;
 import java.math.BigDecimal;
+import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -80,6 +82,29 @@ public class InjectData {
         productService.save(ipad);
         productService.save(macBook);
         productService.save(tesla);
+
+        Discount aprilDiscount = new Discount();
+        aprilDiscount.setName("First april discount");
+        aprilDiscount.setDescription("Discount for those who was fooled on first of april");
+        aprilDiscount.setPercent(new BigDecimal(10));
+        aprilDiscount.setProductList(List.of(iphone, ipad));
+
+        Discount birthdayDiscount = new Discount();
+        birthdayDiscount.setName("Birthday discount");
+        birthdayDiscount.setDescription("Discount for those who was born at the day they "
+                + "bought a product");
+        birthdayDiscount.setPercent(new BigDecimal(20));
+        birthdayDiscount.setProductList(List.of(iphone, ipad));
+
+        Discount blackFridayDiscount = new Discount();
+        blackFridayDiscount.setName("Black friday discount");
+        blackFridayDiscount.setDescription("Discount on the last friday of november");
+        blackFridayDiscount.setPercent(new BigDecimal(25));
+        blackFridayDiscount.setProductList(List.of(tesla));
+
+        discountService.save(aprilDiscount);
+        discountService.save(birthdayDiscount);
+        discountService.save(blackFridayDiscount);
 
         return "Data injected!";
     }
