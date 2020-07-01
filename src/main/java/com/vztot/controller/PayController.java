@@ -17,6 +17,7 @@ public class PayController {
 
     @GetMapping
     public String addMoneyToUser(@RequestParam Long userId, @RequestParam Long productId) {
-        return payService.buy(userId, productId) ? "Success!" : "Not enough money!";
+        return payService.buy(userId, productId) ? "{\"result\" : \"success\"}" : "{\"result\" : "
+                + "\"fail\"}";
     }
 }

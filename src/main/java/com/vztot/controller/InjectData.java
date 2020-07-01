@@ -86,20 +86,20 @@ public class InjectData {
         Discount aprilDiscount = new Discount();
         aprilDiscount.setName("First april discount");
         aprilDiscount.setDescription("Discount for those who was fooled on first of april");
-        aprilDiscount.setPercent(new BigDecimal(10));
+        aprilDiscount.setPercent(new BigDecimal("0.1"));
         aprilDiscount.setProductList(List.of(iphone, ipad));
 
         Discount birthdayDiscount = new Discount();
         birthdayDiscount.setName("Birthday discount");
         birthdayDiscount.setDescription("Discount for those who was born at the day they "
                 + "bought a product");
-        birthdayDiscount.setPercent(new BigDecimal(20));
+        birthdayDiscount.setPercent(new BigDecimal("0.2"));
         birthdayDiscount.setProductList(List.of(iphone, ipad));
 
         Discount blackFridayDiscount = new Discount();
         blackFridayDiscount.setName("Black friday discount");
         blackFridayDiscount.setDescription("Discount on the last friday of november");
-        blackFridayDiscount.setPercent(new BigDecimal(25));
+        blackFridayDiscount.setPercent(new BigDecimal("0.25"));
         blackFridayDiscount.setProductList(List.of(tesla));
 
         discountService.save(aprilDiscount);
