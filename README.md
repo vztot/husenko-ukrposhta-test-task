@@ -16,9 +16,7 @@ To run this project:
 
 1. Open the project in your IDE.
   
-2. Add Java SDK 11 or above.
-  
-3. Run TestTaskApplication.
+2. Run TestTaskApplication.
 
 ## Author
 [Oleksandr Husenko](https://www.linkedin.com/in/oleksandr-husenko-6a63a2b3/)
