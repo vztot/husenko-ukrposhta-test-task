@@ -32,61 +32,28 @@ public class InjectData {
 
     @GetMapping
     public String injectData() {
-        User userSasha = new User();
-        User userMasha = new User();
-        userSasha.setName("Sasha");
-        userMasha.setName("Masha");
-        userSasha.setMoney(new BigDecimal(100));
-        userMasha.setMoney(new BigDecimal(100));
-        userService.save(userSasha);
-        userService.save(userMasha);
+        injectUsers();
+        injectCategories();
+        injectProducts();
+        injectDiscounts();
+        return "{\"result\" : \"data injected\"}";
+    }
 
-        Category phone = new Category();
-        phone.setCategoryName("Phone");
-        Category tablet = new Category();
-        tablet.setCategoryName("Tablet");
-        Category laptop = new Category();
-        laptop.setCategoryName("Laptop");
-        Category car = new Category();
-        car.setCategoryName("Car");
-        phone = categoryService.save(phone);
-        tablet = categoryService.save(tablet);
-        laptop = categoryService.save(laptop);
-        car = categoryService.save(car);
-
-        Product iphone = new Product();
-        iphone.setName("iPhone");
-        iphone.setDescription("Mobile phone");
-        iphone.setCategory(phone);
-        iphone.setPrice(new BigDecimal(1000));
-
-        Product ipad = new Product();
-        ipad.setName("iPad");
-        ipad.setDescription("Ergonomic tablet");
-        ipad.setCategory(tablet);
-        ipad.setPrice(new BigDecimal(1500));
-
-        Product macBook = new Product();
-        macBook.setName("MacBook");
-        macBook.setDescription("Ergonomic laptop");
-        macBook.setCategory(laptop);
-        macBook.setPrice(new BigDecimal(2000));
-
-        Product tesla = new Product();
-        tesla.setName("Tesla");
-        tesla.setDescription("Electric car");
-        tesla.setPrice(new BigDecimal(20000));
-        tesla.setCategory(car);
-
-        productService.save(iphone);
-        productService.save(ipad);
-        productService.save(macBook);
-        productService.save(tesla);
+    private void injectDiscounts() {
+        List<Product> products = productService.getAll();
 
         Discount aprilDiscount = new Discount();
         aprilDiscount.setName("First april discount");
         aprilDiscount.setDescription("Discount for those who was fooled on first of april");
         aprilDiscount.setPercent(new BigDecimal("0.1"));
+        Product iphone = products.stream()
+                .filter(product -> product.getName().equals("iPhone"))
+                .findFirst()
+                .get();
+        Product ipad = products.stream()
+                .filter(product -> product.getName().equals("iPad"))
+                .findFirst()
+                .get();
         aprilDiscount.setProductList(List.of(iphone, ipad));
 
         Discount birthdayDiscount = new Discount();
@@ -100,12 +67,89 @@ public class InjectData {
         blackFridayDiscount.setName("Black friday discount");
         blackFridayDiscount.setDescription("Discount on the last friday of november");
         blackFridayDiscount.setPercent(new BigDecimal("0.25"));
+        Product tesla = products.stream()
+                .filter(product -> product.getName().equals("Tesla"))
+                .findFirst()
+                .get();
         blackFridayDiscount.setProductList(List.of(tesla));
 
         discountService.save(aprilDiscount);
         discountService.save(birthdayDiscount);
         discountService.save(blackFridayDiscount);
+    }
 
-        return "{\"result\" : \"data injected\"}";
+    private void injectCategories() {
+        Category phone = new Category();
+        phone.setCategoryName("Phone");
+        Category tablet = new Category();
+        tablet.setCategoryName("Tablet");
+        Category laptop = new Category();
+        laptop.setCategoryName("Laptop");
+        Category car = new Category();
+        car.setCategoryName("Car");
+        categoryService.save(phone);
+        categoryService.save(tablet);
+        categoryService.save(laptop);
+        categoryService.save(car);
+    }
+
+    private void injectProducts() {
+        List<Category> categories = categoryService.getAll();
+
+        Product iphone = new Product();
+        iphone.setName("iPhone");
+        iphone.setDescription("Mobile phone");
+        Category phone = categories.stream()
+                .filter(category -> category.getCategoryName().equals("Phone"))
+                .findFirst()
+                .get();
+        iphone.setCategory(phone);
+        iphone.setPrice(new BigDecimal(1000));
+
+        Product ipad = new Product();
+        ipad.setName("iPad");
+        ipad.setDescription("Ergonomic tablet");
+        Category tablet = categories.stream()
+                .filter(category -> category.getCategoryName().equals("Tablet"))
+                .findFirst()
+                .get();
+        ipad.setCategory(tablet);
+        ipad.setPrice(new BigDecimal(1500));
+
+        Product macBook = new Product();
+        macBook.setName("MacBook");
+        macBook.setDescription("Ergonomic laptop");
+        Category laptop = categories.stream()
+                .filter(category -> category.getCategoryName().equals("Laptop"))
+                .findFirst()
+                .get();
+        macBook.setCategory(laptop);
+        macBook.setPrice(new BigDecimal(2000));
+
+        Product tesla = new Product();
+        tesla.setName("Tesla");
+        tesla.setDescription("Electric car");
+        tesla.setPrice(new BigDecimal(20000));
+        Category car = categories.stream()
+                .filter(category -> category.getCategoryName().equals("Car"))
+                .findFirst()
+                .get();
+        tesla.setCategory(car);
+
+        productService.save(iphone);
+        productService.save(ipad);
+        productService.save(macBook);
+        productService.save(tesla);
+    }
+
+    private void injectUsers() {
+        User userSasha = new User();
+        User userMasha = new User();
+        userSasha.setName("Sasha");
+        userMasha.setName("Masha");
+        userSasha.setMoney(new BigDecimal(100));
+        userMasha.setMoney(new BigDecimal(100));
+        userService.save(userSasha);
+        userService.save(userMasha);
     }
 }
