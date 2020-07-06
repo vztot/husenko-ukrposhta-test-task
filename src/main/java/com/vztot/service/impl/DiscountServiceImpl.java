@@ -1,7 +1,6 @@
 package com.vztot.service.impl;
 
 import com.vztot.entity.Discount;
-import com.vztot.entity.Product;
 import com.vztot.repository.DiscountRepository;
 import com.vztot.service.DiscountService;
 import com.vztot.service.ProductService;
@@ -34,10 +33,5 @@ public class DiscountServiceImpl implements DiscountService {
     @Override
     public Discount getOne(Long id) {
         return discountRepository.getOne(id);
-    }
-
-    @Override
-    public List<Discount> findDiscountByProduct(Product product) {
-        return discountRepository.findDiscountByProduct(product);
     }
 }

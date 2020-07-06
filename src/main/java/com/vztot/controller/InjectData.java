@@ -9,6 +9,7 @@ import com.vztot.service.DiscountService;
 import com.vztot.service.ProductService;
 import com.vztot.service.UserService;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,12 +45,12 @@ public class InjectData {
     }
 
     private void injectDiscounts() {
-        List<Product> products = productService.getAll();
-
         Discount aprilDiscount = new Discount();
         aprilDiscount.setName("First april discount");
         aprilDiscount.setDescription("Discount for those who was fooled on first of april");
         aprilDiscount.setPercent(new BigDecimal("0.1"));
+        List<Product> products = productService.getAll();
+        discountService.save(aprilDiscount);
         Product iphone = products.stream()
                 .filter(product -> product.getName().equals("iPhone"))
                 .findFirst()
@@ -58,28 +59,36 @@ public class InjectData {
                 .filter(product -> product.getName().equals("iPad"))
                 .findFirst()
                 .get();
-        aprilDiscount.setProductList(List.of(iphone, ipad));
+        for (Product p : List.of(iphone, ipad)) {
+            p.getDiscountList().add(aprilDiscount);
+        }
 
         Discount birthdayDiscount = new Discount();
         birthdayDiscount.setName("Birthday discount");
         birthdayDiscount.setDescription("Discount for those who was born at the day they "
                 + "bought a product");
         birthdayDiscount.setPercent(new BigDecimal("0.2"));
-        birthdayDiscount.setProductList(List.of(iphone, ipad));
+        discountService.save(birthdayDiscount);
+        for (Product p : List.of(iphone, ipad)) {
+            p.getDiscountList().add(birthdayDiscount);
+        }
 
         Discount blackFridayDiscount = new Discount();
         blackFridayDiscount.setName("Black friday discount");
         blackFridayDiscount.setDescription("Discount on the last friday of november");
         blackFridayDiscount.setPercent(new BigDecimal("0.25"));
+        discountService.save(blackFridayDiscount);
         Product tesla = products.stream()
                 .filter(product -> product.getName().equals("Tesla"))
                 .findFirst()
                 .get();
-        blackFridayDiscount.setProductList(List.of(tesla));
+        for (Product p : List.of(tesla)) {
+            p.getDiscountList().add(blackFridayDiscount);
+        }
 
-        discountService.save(aprilDiscount);
-        discountService.save(birthdayDiscount);
-        discountService.save(blackFridayDiscount);
+        productService.save(ipad);
+        productService.save(iphone);
+        productService.save(tesla);
     }
 
     private void injectCategories() {
@@ -103,6 +112,7 @@ public class InjectData {
         Product iphone = new Product();
         iphone.setName("iPhone");
         iphone.setDescription("Mobile phone");
+        iphone.setDiscountList(new ArrayList<>());
         Category phone = categories.stream()
                 .filter(category -> category.getCategoryName().equals("Phone"))
                 .findFirst()
@@ -113,6 +123,7 @@ public class InjectData {
         Product ipad = new Product();
         ipad.setName("iPad");
         ipad.setDescription("Ergonomic tablet");
+        ipad.setDiscountList(new ArrayList<>());
         Category tablet = categories.stream()
                 .filter(category -> category.getCategoryName().equals("Tablet"))
                 .findFirst()
@@ -123,6 +134,7 @@ public class InjectData {
         Product macBook = new Product();
         macBook.setName("MacBook");
         macBook.setDescription("Ergonomic laptop");
+        macBook.setDiscountList(new ArrayList<>());
         Category laptop = categories.stream()
                 .filter(category -> category.getCategoryName().equals("Laptop"))
                 .findFirst()
@@ -134,6 +146,7 @@ public class InjectData {
         tesla.setName("Tesla");
         tesla.setDescription("Electric car");
         tesla.setPrice(new BigDecimal(20000));
+        tesla.setDiscountList(new ArrayList<>());
         Category car = categories.stream()
                 .filter(category -> category.getCategoryName().equals("Car"))
                 .findFirst()

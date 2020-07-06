@@ -31,7 +31,7 @@ public class PayServiceImpl implements PayService {
     public boolean buy(Long userId, Long productId) {
         User user = userService.getOne(userId);
         Product product = productService.getOne(productId);
-        List<Discount> discountList = discountService.findDiscountByProduct(product);
+        List<Discount> discountList = product.getDiscountList();
         BigDecimal productPrice = product.getPrice();
         if (discountList.size() > 0) {
             BigDecimal bestDiscount = discountList
