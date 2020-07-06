@@ -10,7 +10,7 @@ import com.vztot.service.ProductService;
 import com.vztot.service.UserService;
 import java.math.BigDecimal;
 import java.util.List;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,13 +30,17 @@ public class InjectData {
         this.categoryService = categoryService;
     }
 
-    @GetMapping
-    public String injectData() {
+    @RequestMapping
+    public ResponseEntity<String> injectData() {
+        if (userService.getAll().size() > 0) {
+            return ResponseEntity.badRequest()
+                    .body("Data was already injected");
+        }
         injectUsers();
         injectCategories();
         injectProducts();
         injectDiscounts();
-        return "{\"result\" : \"data injected\"}";
+        return ResponseEntity.ok("Successful injection");
     }
 
     private void injectDiscounts() {
