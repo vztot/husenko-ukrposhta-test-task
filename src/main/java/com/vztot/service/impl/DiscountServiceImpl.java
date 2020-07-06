@@ -7,6 +7,7 @@ import com.vztot.service.DiscountService;
 import com.vztot.service.ProductService;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DiscountServiceImpl implements DiscountService {
@@ -19,6 +20,7 @@ public class DiscountServiceImpl implements DiscountService {
         this.productService = productService;
     }
 
+    @Transactional
     @Override
     public Discount save(Discount discount) {
         return discountRepository.save(discount);

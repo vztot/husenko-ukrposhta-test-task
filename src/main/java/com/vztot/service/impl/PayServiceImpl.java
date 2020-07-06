@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -25,6 +26,7 @@ public class PayServiceImpl implements PayService {
         this.discountService = discountService;
     }
 
+    @Transactional
     @Override
     public boolean buy(Long userId, Long productId) {
         User user = userService.getOne(userId);
