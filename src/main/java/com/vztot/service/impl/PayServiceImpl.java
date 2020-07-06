@@ -40,7 +40,6 @@ public class PayServiceImpl implements PayService {
             BigDecimal discountValue = productPrice.multiply(bestDiscount);
             productPrice = productPrice.subtract(discountValue);
         }
-        System.out.println(productPrice);
         if (user.getMoney().compareTo(productPrice) >= 0) {
             user.setMoney(user.getMoney().subtract(productPrice));
             userService.save(user);

@@ -5,6 +5,6 @@ import lombok.Data;
 
 @Data
 public class UserRequestDto {
-    String name;
-    BigDecimal money;
+    private String name;
+    private BigDecimal money;
 }
