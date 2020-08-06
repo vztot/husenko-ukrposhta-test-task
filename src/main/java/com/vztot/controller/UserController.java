@@ -10,9 +10,9 @@ import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/user")
@@ -39,8 +39,8 @@ public class UserController {
         userService.save(userMapper.buildUserFromRequestDto(dto));
     }
 
-    @RequestMapping(value = "/add_money/{userId}/{amount}", method = RequestMethod.PUT)
-    public void addMoneyToUser(@PathVariable Long userId,@PathVariable BigDecimal amount) {
+    @PutMapping(value = "/add_money/{userId}/{amount}")
+    public void addMoneyToUser(@PathVariable Long userId, @PathVariable BigDecimal amount) {
         userService.addMoney(userId, amount);
     }
 }

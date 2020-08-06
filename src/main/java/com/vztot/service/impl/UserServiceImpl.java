@@ -6,6 +6,7 @@ import com.vztot.service.UserService;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,6 +16,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     @Override
     public User save(User user) {
         return userRepository.save(user);
@@ -30,6 +32,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.getOne(id);
     }
 
+    @Transactional
     @Override
     public void addMoney(Long userId, BigDecimal amount) {
         User user = userRepository.getOne(userId);

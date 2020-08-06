@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PayServiceImpl implements PayService {
@@ -25,11 +26,12 @@ public class PayServiceImpl implements PayService {
         this.discountService = discountService;
     }
 
+    @Transactional
     @Override
     public boolean buy(Long userId, Long productId) {
         User user = userService.getOne(userId);
         Product product = productService.getOne(productId);
-        List<Discount> discountList = discountService.findDiscountByProduct(product);
+        List<Discount> discountList = product.getDiscountList();
         BigDecimal productPrice = product.getPrice();
         if (discountList.size() > 0) {
             BigDecimal bestDiscount = discountList
@@ -40,7 +42,6 @@ public class PayServiceImpl implements PayService {
             BigDecimal discountValue = productPrice.multiply(bestDiscount);
             productPrice = productPrice.subtract(discountValue);
         }
-        System.out.println(productPrice);
         if (user.getMoney().compareTo(productPrice) >= 0) {
             user.setMoney(user.getMoney().subtract(productPrice));
             userService.save(user);
